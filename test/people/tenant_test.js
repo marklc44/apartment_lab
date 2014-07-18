@@ -2,7 +2,7 @@ var expect = require("chai").expect,
   Tenant = require("../../src/people/tenant.js"),
   Person = require("../../src/people/person.js");
 
-describe("Person", function(){
+describe("Tenant", function(){
   var tenant = new Tenant("test", "test");
 
   it('should create a person with name test', function() {
