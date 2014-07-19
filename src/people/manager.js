@@ -21,7 +21,10 @@ Manager.prototype.addProperty = function(property) {
 };
 
 Manager.prototype.removeProperty = function(property) {
-  this.properties.splice(this.properties[this.properties.indexOf(property)], 1);
+  if (property instanceof Property) {
+    this.properties.splice(this.properties[this.properties.indexOf(property)], 1);
+  }
+  
 };
 
 module.exports = Manager;

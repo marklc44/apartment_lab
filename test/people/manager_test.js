@@ -32,6 +32,17 @@ describe("Manager", function(){
   		manager.removeProperty(prop);
   		expect(manager.properties).to.deep.equal([prop2]);
   	});
+
+    it('should remove from properties array', function() {
+      var prop = new Property('address');
+      var prop2 = new Property('address');
+
+      manager.addProperty(prop);
+      manager.addProperty(prop2);
+      manager.removeProperty(prop);
+      expect(manager.properties).to.deep.equal([prop2]);
+    });
+    
   });
 
 });
