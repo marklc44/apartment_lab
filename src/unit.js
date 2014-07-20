@@ -10,6 +10,11 @@ function Unit (number, building, sqft, rent) {
 
 Unit.prototype.available = function(){
   // check for tenant
+  if (this.tenant === null) {
+  	return true;
+  } else {
+  	return false;
+  }
 }
 
 module.exports = Unit;

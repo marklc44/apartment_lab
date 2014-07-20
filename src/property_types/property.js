@@ -6,7 +6,6 @@ function Property(address) {
   this.units = [];
   this.maxUnits = 1;
   this.manager = [];
-  this.tenants = [];
 }
 
 Property.prototype.setManager = function(person) {
@@ -26,17 +25,22 @@ Property.prototype.getManager = function(){
 Property.prototype.addTenant = function(unit, tenant) {
   // add tenant but check to make sure there
   // is a manager first and a tenant has 2 references
-  if(this.manager.length > 0 && tenant.references.length >= 2) {
+  // check if unit is available
+  if(this.manager.length > 0 
+    && tenant.references.length >= 2
+    && unit.available
+    && this.units.length <= this.maxUnits) {
     // the property itself may not have tenants, only units
-    this.tenants.push(tenant);
-    // also add tenant to unit
     unit.tenant = tenant;
+    this.units.push(unit);
+  } else {
+    return "Could not add tenant.";
   }
 };
 
 Property.prototype.removeTenant = function(unit, tenant) {
   // remove tenant
-  this.tenants.splice(this.tenants[this.tenants.indexOf(tenant), 1]);
+  this.units.splice(this.units[this.units.indexOf(unit), 1]);
   unit.tenants = null;
 };
 

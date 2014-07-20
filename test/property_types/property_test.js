@@ -54,7 +54,7 @@ describe("Property", function(){
 
   		property.addTenant(unit, tenant);
   		var tenants = property.tenants;
-  		expect(tenants).to.eql([tenant]);
+  		expect(property.units).to.eql([unit]);
       expect(unit.tenant).to.eql(tenant);
   	});
 
@@ -76,8 +76,7 @@ describe("Property", function(){
 
       property.addTenant(unit, tenant);
       property.removeTenant(unit, tenant);
-      var tenants = property.tenants;
-      expect(tenants).to.eql([]);
+      expect(property.units).to.eql([]);
     });
 
   });
