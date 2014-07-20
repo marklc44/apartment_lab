@@ -1,5 +1,5 @@
-var Person = require("./person"),
-		Property = require('../property_types/property.js');
+var Person = require('./person.js'),
+    Property = require('../property_types/property.js');
 var inherit = require('../inherit.js');
 
 function Manager(name, contact) {
@@ -16,8 +16,9 @@ Manager.prototype.addProperty = function(property) {
   // add property from properties
   if (property instanceof Property) {
   	this.properties.push(property);
+    return true;
   }
-  
+  return false;
 };
 
 Manager.prototype.removeProperty = function(property) {
