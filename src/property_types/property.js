@@ -26,13 +26,18 @@ Property.prototype.getManager = function(){
 Property.prototype.addTenant = function(unit, tenant) {
   // add tenant but check to make sure there
   // is a manager first and a tenant has 2 references
-  if(this.manager.length > 1 && tenant.references.length >= 2) {
+  if(this.manager.length > 0 && tenant.references.length >= 2) {
+    // the property itself may not have tenants, only units
     this.tenants.push(tenant);
+    // also add tenant to unit
+    unit.tenant = tenant;
   }
 };
 
 Property.prototype.removeTenant = function(unit, tenant) {
   // remove tenant
+  this.tenants.splice(this.tenants[this.tenants.indexOf(tenant), 1]);
+  unit.tenants = null;
 };
 
 Property.prototype.availableUnits = function(){

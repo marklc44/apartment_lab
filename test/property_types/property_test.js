@@ -40,7 +40,8 @@ describe("Property", function(){
 
   describe('#addTenant', function() {
 
-    beforeEach(function() {
+  	it('should add a tenant if there is a manager and the tenant has 2 refs', function() {
+
       var tenant = new app.Tenant('name', 'contact');
       var person1 = new app.Person('name', 'contact');
       var person2 = new app.Person('name', 'contact');
@@ -50,16 +51,28 @@ describe("Property", function(){
       tenant.references.push(person1);
       tenant.references.push(person2);
       property.setManager(manager);
-    });
-
-  	it('should add a tenant if there is a manager and the tenant has 2 refs', function() {
 
   		property.addTenant(unit, tenant);
   		var tenants = property.tenants;
   		expect(tenants).to.eql([tenant]);
+      expect(unit.tenant).to.eql(tenant);
   	});
 
+  });
+
+  describe('#removeTenant', function() {
+
     it('should remove a tenant', function() {
+
+      var tenant = new app.Tenant('name', 'contact');
+      var person1 = new app.Person('name', 'contact');
+      var person2 = new app.Person('name', 'contact');
+      var manager = new app.Manager('name', 'contact');
+      var unit = new app.Unit(1, 'building', 1000, 1000);
+
+      tenant.references.push(person1);
+      tenant.references.push(person2);
+      property.setManager(manager);
 
       property.addTenant(unit, tenant);
       property.removeTenant(unit, tenant);
