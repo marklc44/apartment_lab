@@ -1,4 +1,5 @@
 var expect = require("chai").expect,
+	app = require('../src/main.js');
   Unit = require("../src/unit.js");
 
 var unit;
@@ -15,5 +16,16 @@ describe("Unit", function(){
 	});
 	it('should have rent of 800', function() {
 		expect(unit.sqft).to.equal(800);
+	});
+
+	describe("#available", function() {
+		
+		it('should return false if tenant is not null', function() {
+			var tenant = new app.Tenant('name', 'contact');
+			var unit = new Unit(2, 'building', 800, 1000);
+			unit.tenant = tenant;
+			var result = unit.available();
+			expect(result).to.eql(false);
+		});
 	});
 });
