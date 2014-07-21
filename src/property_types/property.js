@@ -26,15 +26,19 @@ Property.prototype.addTenant = function(unit, tenant) {
   // add tenant but check to make sure there
   // is a manager first and a tenant has 2 references
   // check if unit is available
-  if(this.manager.length > 0 
-    && tenant.references.length >= 2
-    && unit.available
-    && this.units.length <= this.maxUnits) {
+  if(this.manager.length < 1) {
+    return "This property doesn't have a manager.";
+  } else if (tenant.references.length < 2) {
+    return "This tenant doesn't have enough references.";
+  } else if (!unit.available) {
+    return "This unit is not available";
+  } else if (this.units.length >= this.maxUnits) {
+    return "There are no available units at this property.";
+  } else {
     // the property itself may not have tenants, only units
     unit.tenant = tenant;
     this.units.push(unit);
-  } else {
-    return "Could not add tenant.";
+    return true;
   }
 };
 
